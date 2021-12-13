@@ -17,7 +17,7 @@ def listOrganizations():
     response = requests.get( url, headers=headers, data = payload)
 
     # Luego pasamos la repuesta del request a json, para poder manejarla más fácil
-
+    response.raise_for_status()
     organizationsInfo = json.loads(response.text)  # este objeto es de tipo lista
     n = len(organizationsInfo)                     # el largo de esta lista es igual al número de organizaciones (en este caso 29)
     print("Lista de organizaciones:")
