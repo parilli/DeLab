@@ -7,7 +7,7 @@ def listOrganizations():
 
     # Primero hacemos la operación de getOrganizations 
 
-    url = "https://api.meraki.com/api/v1/organizations"    # dirección para hacer el request
+    url = "https://api.meraki.com/api/v1/oyganizations"    # dirección para hacer el request
     headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
@@ -17,8 +17,9 @@ def listOrganizations():
     response = requests.get( url, headers=headers, data = payload)
 
     # Luego pasamos la repuesta del request a json, para poder manejarla más fácil
-
+    response.raise_for_status()
     organizationsInfo = json.loads(response.text)  # este objeto es de tipo lista
+    
     n = len(organizationsInfo)                     # el largo de esta lista es igual al número de organizaciones (en este caso 29)
     print("Lista de organizaciones:")
 
@@ -30,6 +31,6 @@ def listOrganizations():
         organizationName = organizationsInfo[i]['name']  # en el elemento i de la lista, accedemos a la categoría de 'name'
         print(str(i)+"."+str(organizationName))
 
-   
-    
 
+listOrganizations()
+    
