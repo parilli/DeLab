@@ -66,12 +66,12 @@ def getDevices(organizationId): # esta funcion tiene como input el id correspond
     
     return devicesInfo   # se regresa la lista con todos los equipos de dicha organizacion
 
-def makeInventory(organizations,organizationName):
+def makeInventory(organizationInfo,organizationName):
     
     with open('devices_file.csv', mode='w') as devices_file:
         device_writer = csv.writer(devices_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         device_writer.writerow(['Modelo del equipo', 'Nombre', 'dirección MAC','dirección IP','Número serial','Status'])
-        id = getOrganizationId(organizations,organizationName)
+        id = getOrganizationId(organizationInfo,organizationName)
         devices = getDevices(int(id))
         for j in range(len(devices)):
             # print(str(j)+"."+str(devices[j]['name']))
