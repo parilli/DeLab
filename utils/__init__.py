@@ -14,9 +14,9 @@ def getOrganizations():
     }
     payload = None
     response = requests.get( url, headers=headers, data = payload)
-
+    response.raise_for_status() # para verificar que el request se hizo bien
+    
     # Luego pasamos la repuesta del request a json, para poder manejarla más fácil
-    response.raise_for_status()
     organizationsInfo = json.loads(response.text)  # este objeto es de tipo lista
 
 
@@ -48,13 +48,6 @@ def getOrganizationId(organizationsInfo,organizationName):
         
     else:
         return organizationId
-
-    
-    
-
-    
-
-
     
 def getDevices(organizationId): # esta funcion tiene como input el id correspondiente a la oganización de la cual se quieren obtener los equipos
     
