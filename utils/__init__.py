@@ -1,9 +1,8 @@
 import requests
 import json
+import csv
 
-
-
-def listOrganizations():
+def getOrganizations():
 
     # Primero hacemos la operación de getOrganizations 
 
@@ -19,7 +18,12 @@ def listOrganizations():
     # Luego pasamos la repuesta del request a json, para poder manejarla más fácil
     response.raise_for_status()
     organizationsInfo = json.loads(response.text)  # este objeto es de tipo lista
-    
+
+
+    return organizationsInfo
+
+def listOrganizations(organizationsInfo):
+
     n = len(organizationsInfo)                     # el largo de esta lista es igual al número de organizaciones (en este caso 29)
     print("Lista de organizaciones:")
 
@@ -32,5 +36,53 @@ def listOrganizations():
         print(str(i)+"."+str(organizationName))
 
 
-listOrganizations()
+
+def getOrganizationId(organizationsInfo,organizationName):
+    organizationId = None
+    for i in range (len(organizationsInfo)):
+        if (organizationsInfo[i]['name']==organizationName):
+            organizationId = organizationsInfo[i]['id']
+            
+    if (organizationId == None):
+        raise NameError("Introduzca un nombre de organización válido")
+        
+    else:
+        return organizationId
+
     
+    
+
+    
+
+
+    
+def getDevices(organizationId): # esta funcion tiene como input el id correspondiente a la oganización de la cual se quieren obtener los equipos
+    
+    url = "https://api.meraki.com/api/v1/organizations/"+str(organizationId)+"/devices" # direccion en donde estan los devices 
+
+    payload = None
+
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "X-Cisco-Meraki-API-Key": "6bec40cf957de430a6f1f2baa056b99a4fac9ea0"
+    }
+
+    response = requests.request('GET', url, headers=headers, data = payload)  # se hace el request al url especificado
+    devicesInfo = response.json()       # respuesta en formato json (lista)
+    
+    return devicesInfo   # se regresa la lista con todos los equipos de dicha organizacion
+
+def makeInventory(organizations,organizationName):
+    
+    with open('devices_file.csv', mode='w') as devices_file:
+        device_writer = csv.writer(devices_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        device_writer.writerow(['Modelo del equipo', 'Nombre', 'dirección MAC','dirección IP','Número serial','Status'])
+        id = getOrganizationId(organizations,organizationName)
+        devices = getDevices(int(id))
+        for j in range(len(devices)):
+            # print(str(j)+"."+str(devices[j]['name']))
+            if(devices[j]['productType']== "wireless" or devices[j]['productType']== "appliance"):
+                device_writer.writerow([devices[j]['model'], devices[j]['name'], devices[j]['mac'], devices[j]['lanIp'],devices[j]['serial'],devices[j]['tags']])
+
+   
