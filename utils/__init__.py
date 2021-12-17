@@ -6,7 +6,7 @@ def getOrganizations():
 
     # Primero hacemos la operación de getOrganizations 
 
-    url = "https://api.meraki.com/api/v1/oyganizations"    # dirección para hacer el request
+    url = "https://api.meraki.com/api/v1/organizations"    # dirección para hacer el request
     headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
@@ -76,6 +76,6 @@ def makeInventory(organizationInfo,organizationName):
         for j in range(len(devices)):
             # print(str(j)+"."+str(devices[j]['name']))
             if(devices[j]['productType']== "wireless" or devices[j]['productType']== "appliance"):
-                device_writer.writerow([devices[j]['model'], devices[j]['name'], devices[j]['mac'], devices[j]['lanIp'],devices[j]['serial'],devices[j]['tags']])
+                device_writer.writerow([devices[j]['model'], devices[j]['name'], devices[j]['mac'], devices[j]['lanIp'],devices[j]['serial'],devices[j]['configurationUpdatedAt']])
 
    
