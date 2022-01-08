@@ -7,12 +7,11 @@ import csv
 # y además de cómo se puede hacer un inventario con las funciones implementadas recientemente.
 
 organizations = utils.getOrganizations()  # primero obtenemos todas las organizaciones disponibles
-
 # Listar organizaciones
 utils.listOrganizations(organizations)
-
 # Hacer inventario 
 utils.makeInventory(organizations,"DeLab")
 
 
-            
+
+

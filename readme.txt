@@ -32,3 +32,10 @@ Las funciones implementadas hasta ahora son:
     5. makeInventory(organizationsInfo,organizationName) ---> genera el inventario de los equipos de la organizacion especificada en un archivo de formato .csv
         inputs: [organizationsInfo]: [organizationName]
         outputs: void
+
+**************** ACTUALIZACIÓN ****************
+**************** (08/01/2022) *****************
+
+En esta nueva actualización el inventario que se genera automáticamente ahora siempre estará actualizado. El nuevo script (appDeLab.py) se ejecutará en la plataforma Docker de la compañia en producción.
+
+Este script ya mencionado cuenta con un temporizador que nos permite realizar una consulta y generar un inventario cada 5 minutos.
