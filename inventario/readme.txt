@@ -1,0 +1,1 @@
+***************** CARPETA EN DONDE SE GUARDA EL INVENTARIO *****************************
