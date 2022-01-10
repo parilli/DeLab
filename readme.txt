@@ -39,3 +39,8 @@ Las funciones implementadas hasta ahora son:
 En esta nueva actualización el inventario que se genera automáticamente ahora siempre estará actualizado. El nuevo script (appDeLab.py) se ejecutará en la plataforma Docker de la compañia en producción.
 
 Este script ya mencionado cuenta con un temporizador que nos permite realizar una consulta y generar un inventario cada 5 minutos.
+
+Nuevos archivos:
+
+1. Dockerfile: nos permite construir una imagen para el contenedor.
+2. docker-compose.yml: gracias a este archivo solo necesitará ejecutar en consola el comando " sudo docker compose-up -d" para crear su contenedor con volumen, para así tener el inventario generado localmente, por seguridad, en caso de que el contenedor se detenga.
